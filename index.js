@@ -7,7 +7,7 @@ const { v4: uuid } = require('uuid')
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-app.set('views',path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 // /css/mycss.css
@@ -36,17 +36,13 @@ app.get('/', (req, res) => {
 
 
 app.post('/', (req, res) => { // 新增, 完成
-    const { matter, action, schedule } = req.body;
-    const eventId = uuid()
+    const { matter, action, id } = req.body;
     if (action === 'done') {
-        const scheduleC = events.find(c => c.id === matter);
+        const scheduleC = events.find(c => c.id === id);
         scheduleC.schedule = true
     } else if (action === 'add') {
-        const existingItem = events.find(c => c.id === matter && c.schedule === false);
-        if (!existingItem) {
-            events.push({ id: eventId, matter, schedule: false });
-    } 
-}
+        events.push({ id: uuid(), matter, schedule: false });
+    }
     res.redirect('/');
 })
 
@@ -62,9 +58,13 @@ app.delete('/', (req, res) => {
     events = events.filter(c => c.id !== id)
     res.redirect('/')
 })
-
+// 漢堡 != 薯條 true
+// 薯條 != 薯條 false 
+// 可樂 != 薯條 true
+// 漢堡1 漢堡1
 
 
 app.listen(3100, () => {
     console.log('ON PORT 3100!')
 })
+
