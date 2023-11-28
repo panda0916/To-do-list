@@ -3,9 +3,24 @@
     
 } */
 h1 {
-    margin-left:600px
+    margin-left:480px;
 }
-#for1{
-    margin-left:400px
-    font-size : 20px
+#for1 {
+    margin-left:477px;
+    font-size:20px;
+}
+#sp1 {
+    margin-left:480px;
+    font-size:20px;
+}
+#sp2 {
+    margin-left:100px;
+    font-size:20px;
+}
+#sp3 {
+    margin-left:480px;
+}
+#newText{
+    width: 150px;
+    height: 35px;
 }

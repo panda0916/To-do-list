@@ -11,71 +11,62 @@
 
 <body>
     <h1>代辦事項</h1>
-    <form action="/" method="post" class="sticky-top" id="for1">
-        <label for="newmatter"></label>
-        <input type="text" placeholder="想做甚麼呢?" name="matter">
-        <input type="hidden" name="action" value="add">
-        <button class="rounded-circle">新增</button>
-    </form>
-    <!-- Flexbox -->
-
+        <form action="/" method="post" class="sticky-top" id="for1">
+            <label for="newmatter"></label>
+            <input type="text" placeholder="想做甚麼呢?" name="matter">
+            <input type="hidden" name="action" value="add">
+            <button class="rounded-circle">新增</button>
+        </form>
     <% for(let c of events) { %>
         <% if(!c.schedule) { %>
-
-            <div>
-                <span>
-                    <b>
-                        <%= c.matter %>
-                    </b>
-                </span>
-
-
-                <span>
-                    <form class="bt1" method="POST" action="/?_method=PATCH" style="display: inline; ">
+        <div>
+            <span id="sp1">
+                <b>
+                    <%= c.matter %>
+                </b>
+            </span>
+            <span id="sp2">
+                <form method="POST" action="/?_method=PATCH" style="display: inline; ">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="matter" value="<%= c.matter %>" style="display: none;">
-                        <input type="text" name="newCommentText" value="<%= c.matter %>">
-                        <button class="rounded-pill btn btn-success" type="submit">修改</button>
-                    </form>
-                    <form class="bt1" method="POST" action="/?_method=DELETE" style="display: inline;">
+                        <input id="newText" type="text" name="newCommentText" value="<%= c.matter %>">
+                    <button class="rounded-pill btn btn-success" type="submit">修改</button>
+                </form>
+                <form method="POST" action="/?_method=DELETE" style="display: inline;">
+                    <input type="hidden" name="id" value="<%= c.id %>" style="display: none;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class=" btn btn-danger rounded-pill  align-middle" type="submit">刪除</button>
+                </form>
+                <form method="POST" action="/" style="display: inline;">
+                    <input type="hidden" name="id" value="<%= c.id %>" style="display: none;">
+                    <input type="hidden" name="action" value="done">
+                     <button class="btn btn-secondary rounded-pill">完成</button>
+                </form>
+            </span>
+                            <% } %>
+                            <% } %>
+        </div>
+
+
+        <div class="text-white-50 bg-dark fixed-bottom">
+
+            <% for(let c of events) { %>
+                <% if(c.schedule) { %>
+            <div>
+                <b id="sp1">
+                    <%= c.matter %>
+                </b>
+                <span id="sp3">
+                    <form method="POST" action="/?_method=DELETE" style="display: inline;">
                         <input type="hidden" name="id" value="<%= c.id %>" style="display: none;">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class=" btn btn-danger rounded-pill  align-middle" type="submit">刪除</button>
-                    </form>
-                    <form class="bt1" method="POST" action="/" style="display: inline;">
-                        <input type="hidden" name="id" value="<%= c.id %>" style="display: none;">
-                        <input type="hidden" name="action" value="done">
-                        <button class="btn btn-secondary rounded-pill">完成</button>
+                        <button class=" btn btn-danger rounded-pill  align-middle"type="submit">刪除</button>
                     </form>
                 </span>
-
             </div>
-            <% } %>
-                <% } %>
-
-                    <div class="text-white-50 bg-dark fixed-bottom">
-
-                        <% for(let c of events) { %>
-                            <!-- c.scheule // boolean , true , false
-            false === true // false
-            true === true // true -->
-                            <% if(c.schedule) { %>
-                                <div>
-                                    <b>
-                                        <%= c.matter %>
-                                    </b>
-                                    <span>
-                                        <form method="POST" action="/?_method=DELETE" style="display: inline;">
-                                            <input type="hidden" name="id" value="<%= c.id %>" style="display: none;">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button class=" btn btn-danger rounded-pill  align-middle"
-                                                type="submit">刪除</button>
-                                        </form>
-                                    </span>
-                                </div>
                                 <% } %>
-                                    <% } %>
-                    </div>
+                                 <% } %>
+        </div>
 </body>
 
 </html>
