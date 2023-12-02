@@ -40,6 +40,13 @@ app.post('/', (req, res) => { // 新增, 完成
     if (action === 'done') {
         const scheduleC = events.find(c => c.id === id);
         scheduleC.schedule = true
+        // 取得已完成的項目
+        const completedItems = events.filter(c => c.schedule);
+        // 如果已完成的項目數量超過三筆，移除最早的項目
+        if (completedItems.length > 3) {
+            const oldestCompletedItem = completedItems.shift();
+            events = events.filter(c => c.id !== oldestCompletedItem.id);
+        }
     } else if (action === 'add') {
         events.push({ id: uuid(), matter, schedule: false });
     }
@@ -47,15 +54,14 @@ app.post('/', (req, res) => { // 新增, 完成
 })
 
 app.patch('/', (req, res) => {
-    const { id } = req.params
-    const { matter, newCommentText } = req.body;
-    const foundComment = events.find(c => c.matter === matter);
+    const { matter, newCommentText, id } = req.body;
+    const foundComment = events.find(c => c.id === matter);
     foundComment.matter = newCommentText;
     res.redirect('/');
 });
 app.delete('/', (req, res) => {
     const { id } = req.body
-    events = events.filter(c => c.id !== id)
+    events = events.filter(c => c.id !== id )
     res.redirect('/')
 })
 // 漢堡 != 薯條 true

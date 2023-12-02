@@ -3,24 +3,21 @@
     
 } */
 h1 {
-    margin-left:480px;
+    margin-left: 430px;
 }
+
 #for1 {
-    margin-left:477px;
-    font-size:20px;
+    margin-left: 430px;
+    font-size: 20px;
 }
-#sp1 {
-    margin-left:480px;
-    font-size:20px;
+
+
+.sp1, .sp2 {
+    display: flex;
+    justify-content: space-between; /* 文字和文字框+按鈕之間的空間平均分配 */
+    align-items: center;
+    margin: 10px auto; /* 垂直置中，也可以根據需要調整上下間距 */
+    max-width: 600px; /* 可以根據需要調整最大寬度 */
 }
-#sp2 {
-    margin-left:100px;
-    font-size:20px;
-}
-#sp3 {
-    margin-left:480px;
-}
-#newText{
-    width: 150px;
-    height: 35px;
-}
+
+
